@@ -10,6 +10,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/start_sniffing')
+def start_sniffing_route():
+    start_sniffing()
+    return "Sniffing started."
+
 def start_sniffing():
     print("Sniffing started...")
     try:
@@ -29,11 +34,6 @@ def analyze_and_visualize_packet(packet):
     
     # Integrate with SIEM
     integrate_with_SIEM(packet)
-
-@app.route('/start_sniffing')
-def start_sniffing_route():
-    start_sniffing()
-    return "Sniffing started."
 
 if __name__ == '__main__':
     app.run(debug=True)
