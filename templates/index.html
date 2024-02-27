@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetGuard: Network Intrusion Detection System</title>
+    <title>NetGuard</title>
 </head>
 <body>
     <h1>NetGuard: Network Intrusion Detection System</h1>
-    <button onclick="startSniffing()">Start Sniffing</button>
+    <button id="start-sniffing-btn">Start Sniffing</button>
+    <div id="analysis-results"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <script>
-        function startSniffing() {
-            fetch('/start_sniffing')
-                .then(response => {
-                    if (response.ok) {
-                        alert('Sniffing started!');
-                    } else {
-                        alert('Failed to start sniffing.');
-                    }
-                });
-        }
+        const socket = io();
+
+        // Listen for packet analysis updates
+        socket.on('packet_analysis', (data) => {
+            const analysisResultsDiv = document.getElementById('analysis-results');
+            analysisResultsDiv.innerHTML = `
+                <h2>Packet Analysis Results:</h2>
+                <p>Analysis: ${data.analysis_result}</p>
+                <p>Visualization: ${data.visualization_result}</p>
+                <p>SIEM Integration: ${data.siem_integration_result}</p>
+            `;
+        });
+
+        // Start sniffing when the button is clicked
+        document.getElementById('start-sniffing-btn').addEventListener('click', () => {
+            socket.emit('start_sniffing');
+        });
     </script>
 </body>
 </html>
