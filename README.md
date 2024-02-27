@@ -55,10 +55,11 @@ pip install -r requirements.txt
     ```
     ```
 
-2. Run the main_gui.py script:
+2. Run the main.py script:
 
     ```
-    python main_gui.py
+    python main.py
+    or python3 main.py
     ```
     # Run the Flask application:
 
@@ -93,8 +94,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - The Scapy development team for providing the powerful packet manipulation capabilities.
 - The Tkinter development team for creating the GUI toolkit used in this project.
-- [OpenAI](https://openai.com) for providing guidance and support.
+- OpenAI (https://openai.com) for providing guidance and support.
 
 ## Contact
 
-For any inquiries or feedback, please contact [your_email@example.com](mailto:your_email@example.com).
+For any inquiries or feedback, please contact [christalococo@gmail.com](mailto:christalococo@gmail.com).
