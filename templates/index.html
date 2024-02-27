@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetGuard</title>
+    <title>NetGaurd</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
 </head>
 <body>
-    <h1>NetGuard: Network Intrusion Detection System</h1>
-    <button id="start-sniffing-btn">Start Sniffing</button>
-    <div id="analysis-results"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <h1>Welcome to NetGaurd</h1>
+    <button onclick="startSniffing()">Start Sniffing</button>
+    <p id="sniffingStatus"></p> <!-- Display sniffing status -->
     <script>
-        const socket = io();
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
 
-        // Listen for packet analysis updates
-        socket.on('packet_analysis', (data) => {
-            const analysisResultsDiv = document.getElementById('analysis-results');
-            analysisResultsDiv.innerHTML = `
-                <h2>Packet Analysis Results:</h2>
-                <p>Analysis: ${data.analysis_result}</p>
-                <p>Visualization: ${data.visualization_result}</p>
-                <p>SIEM Integration: ${data.siem_integration_result}</p>
-            `;
-        });
+        // Function to update sniffing status
+        function updateStatus(status) {
+            document.getElementById('sniffingStatus').innerHTML = status;
+        }
 
-        // Start sniffing when the button is clicked
-        document.getElementById('start-sniffing-btn').addEventListener('click', () => {
+        function startSniffing() {
+            // Displaying message to the user
+            updateStatus("Sniffing started... Please wait!");
+
+            // Emitting start_sniffing event to server
             socket.emit('start_sniffing');
+        }
+
+        // Handling the sniffing success event from server
+        socket.on('sniffing_success', function() {
+            // Updating status and providing explanation to the user
+            updateStatus("Sniffing successful! Analyzing network traffic...");
         });
     </script>
 </body>
