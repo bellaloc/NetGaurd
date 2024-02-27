@@ -1,8 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
-# Copyright (C) Philippe Biondi <phil@secdev.org>
-# Copyright (C) Gabriel Potter <gabriel@potter.fr>
-# This program is published under a GPLv2 license
+# See https://scapy.net/ for more information
+# Copyright (C) Gabriel Potter <gabriel[]potter[]fr>
 
 """
 Interfaces management
@@ -17,8 +16,8 @@ from scapy.consts import WINDOWS
 from scapy.utils import pretty_list
 from scapy.utils6 import in6_isvalid
 
-from scapy.modules.six.moves import UserDict
-import scapy.modules.six as six
+from scapy.libs.six.moves import UserDict
+import scapy.libs.six as six
 
 # Typing imports
 import scapy

@@ -1,8 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
+# See https://scapy.net/ for more information
 # Copyright (C) 2007, 2008, 2009 Arnaud Ebalard
 #               2015, 2016, 2017 Maxence Tury
 #               2019 Romain Perez
-# This program is published under a GPLv2 license
 
 """
 TLS client automaton. This makes for a primitive TLS stack.
@@ -71,7 +72,7 @@ from scapy.layers.tls.crypto.suites import _tls_cipher_suites, \
     _tls_cipher_suites_cls
 from scapy.layers.tls.crypto.groups import _tls_named_groups
 from scapy.layers.tls.crypto.hkdf import TLS13_HKDF
-from scapy.modules import six
+from scapy.libs import six
 from scapy.packet import Raw
 from scapy.compat import bytes_encode
 

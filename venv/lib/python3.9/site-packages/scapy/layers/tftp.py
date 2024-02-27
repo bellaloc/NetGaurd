@@ -1,7 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0-only
 # This file is part of Scapy
-# See http://www.secdev.org/projects/scapy for more information
+# See https://scapy.net/ for more information
 # Copyright (C) Philippe Biondi <phil@secdev.org>
-# This program is published under a GPLv2 license
 
 """
 TFTP (Trivial File Transfer Protocol).
@@ -16,7 +16,6 @@ from scapy.fields import PacketListField, ShortEnumField, ShortField, \
     StrNullField
 from scapy.automaton import ATMT, Automaton
 from scapy.layers.inet import UDP, IP
-from scapy.modules.six.moves import range
 from scapy.config import conf
 from scapy.volatile import RandShort
 
