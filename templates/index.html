@@ -3,19 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetGaurd</title>
+    <title>NetGuard</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        #sniffingStatus {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 300px;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+        #packetInfo {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 300px;
+            text-align: left;
+            display: none; /* Initially hidden */
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to NetGaurd</h1>
+    <h1>Welcome to NetGuard</h1>
     <button onclick="startSniffing()">Start Sniffing</button>
-    <p id="sniffingStatus"></p> <!-- Display sniffing status -->
+    <div id="sniffingStatus"></div> <!-- Display sniffing status -->
+    <div id="packetInfo"></div> <!-- Display packet information -->
+    <div class="container">
+        <h1>Welcome to NetGuard!</h1>
+        <p>NetGuard acts as a traffic monitor for your internet connection, similar to watching cars on a highway. Here's what it does:</p>
+        <ul>
+            <li><strong>Monitors Network Traffic:</strong> NetGuard watches the data flowing through your internet connection, like cars on a road.</li>
+            <li><strong>Analyzes Data Packets:</strong> It examines each packet of data, checking where it's coming from (source), where it's going (destination), what type of data it is (protocol), and more.</li>
+            <li><strong>Provides Real-time Insights:</strong> You can see the analysis results in real-time, allowing you to understand what's happening on your network at any moment.</li>
+        </ul>
+        <p> Explore the live network traffic analysis:</p>
+        <div id="dashboard">
+            <!-- Dashboard content will be updated dynamically -->
+        </div>
+    </div>
     <script>
         var socket = io.connect('http://' + document.domain + ':' + location.port);
 
         // Function to update sniffing status
         function updateStatus(status) {
-            document.getElementById('sniffingStatus').innerHTML = status;
+            var statusElement = document.getElementById('sniffingStatus');
+            statusElement.innerHTML = status;
+            statusElement.style.display = 'block'; // Show status box
+        }
+
+        // Function to update packet information
+        function updatePacketInfo(packet) {
+            var packetInfoElement = document.getElementById('packetInfo');
+            packetInfoElement.innerHTML = `
+                <h2>Packet Information</h2>
+                <p><strong>Source IP:</strong> ${packet.src}</p>
+                <p><strong>Destination IP:</strong> ${packet.dst}</p>
+                <p><strong>Packet Summary:</strong> ${packet.summary}</p>
+            `;
+            packetInfoElement.style.display = 'block'; // Show packet info box
         }
 
         function startSniffing() {
@@ -27,9 +99,11 @@
         }
 
         // Handling the sniffing success event from server
-        socket.on('sniffing_success', function() {
+        socket.on('sniffing_success', function(packet) {
             // Updating status and providing explanation to the user
             updateStatus("Sniffing successful! Analyzing network traffic...");
+            // Displaying packet information
+            updatePacketInfo(packet);
         });
     </script>
 </body>

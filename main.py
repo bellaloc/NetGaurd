@@ -38,4 +38,6 @@ def analyze_and_visualize_packet(packet):
     integrate_with_SIEM(packet)
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    # Disable Flask debug mode
+    app.config['DEBUG'] = False
+    socketio.run(app)

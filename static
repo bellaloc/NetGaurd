@@ -1,0 +1,17 @@
+import os
+from flask import Flask
+
+app = Flask(__name__)
+
+# Define the path to the static directory
+STATIC_PATH = os.path.join(os.path.dirname(__file__), 'static')
+
+# Check if the static directory exists, if not create it
+if not os.path.exists(STATIC_PATH):
+    os.makedirs(STATIC_PATH)
+
+# Set the static folder to the STATIC_PATH
+app.static_folder = STATIC_PATH
+
+if __name__ == '__main__':
+    app.run(debug=True)
