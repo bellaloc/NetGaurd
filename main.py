@@ -30,9 +30,6 @@ def analyze_and_visualize_packet(packet):
     # Integrate with SIEM
     integrate_with_SIEM(packet)
 
-if __name__ == "__main__":
-    start_sniffing()
-
 @app.route('/start_sniffing')
 def start_sniffing_route():
     start_sniffing()

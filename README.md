@@ -10,26 +10,49 @@ NetGuard is a simple yet effective Network Intrusion Detection System (NIDS) imp
 - Alert notifications for detected anomalies.
 - Simple and user-friendly graphical user interface (GUI).
 
+## Prerequisites
+
+- Python 3.x
+- Flask
+- Scapy
+- Additional Python libraries for packet analysis, visualization, and SIEM integration (dependencies specified in requirements.txt)
+
 ## Installation
 
 1. Clone the repository to your local machine:
 
     ```
-    git clone https://github.com/your_username/netguard.git
+    git clone https://github.com/bellaloc/netguard.git
     ```
 
-2. Install the required dependencies:
+2. cd NetGuard
+  - Set up a virtual environment (optional but recommended): 
 
-    ```
-    pip install scapy
-    ```
+    python3 -m venv venv
+
+    Activate the virtual environment:
+
+    # For macOS/Linux
+        source venv/bin/activate
+
+     # For Windows
+        venv\Scripts\activate
+
+# Install the required dependencies:
+
+pip install -r requirements.txt
+
 
 ## Usage
 
 1. Navigate to the project directory:
 
-    ```
     cd netguard
+
+    # cli 
+    
+    Set the FLASK_APP environment variable to main.py:
+    ```
     ```
 
 2. Run the main_gui.py script:
@@ -37,10 +60,16 @@ NetGuard is a simple yet effective Network Intrusion Detection System (NIDS) imp
     ```
     python main_gui.py
     ```
+    # Run the Flask application:
 
-3. Click on the "Start Sniffing" button to initiate packet sniffing.
-4. Monitor the GUI for any alerts generated for detected anomalies.
-5. Click on the "Stop Sniffing" button to stop packet sniffing.
+    flask run
+
+
+1. Open a web browser and navigate to http://127.0.0.1:5000 to access the NetGuard web interface.
+2. Click on the "Start Sniffing" button to begin packet sniffing and intrusion detection.
+3. Monitor the console output for real-time updates on detected network activities.
+4. To stop packet sniffing, click on the "Stop Sniffing" button.
+
 
 ## Contributing
 
